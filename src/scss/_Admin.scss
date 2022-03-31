@@ -1,0 +1,19 @@
+.Admin{
+  font-size: 20px !important;
+
+  .special-card {
+    min-width: 300px;
+  }
+
+  .label {
+    padding: 10px 0 0 0;
+    display: block;
+  }
+  input[type="range"] {
+    width: 100%;
+  }
+  button
+  {
+ 	 	padding:.5em;
+  }
+}

@@ -1,0 +1,398 @@
+.OverlayMap {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.97);
+  opacity: 0;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  font-size: 2em;
+  pointer-events: none;
+  transition: opacity .5s ease;
+  overflow: auto;
+ 
+  .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;  
+    top: 0;
+    left: 0;
+    padding: 4% 5%;
+    min-height: 650px;
+
+    @include viewports(up-to tiny) {
+      min-height: 100%;
+    }
+  }
+  .topBar
+  {
+    color:#0B1560;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    padding: 1rem 1rem 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 3.75rem;
+    line-height: 3.75rem;
+    flex-flow: row wrap;
+
+
+    @include viewports(up-to medium) {  
+      padding: 0 1rem 0 2rem;
+    }
+    @include viewports(up-to small) {
+      padding: .75rem 0 .75rem 5%;
+    }
+    .cargoLogo
+    {
+      //float:left;
+      height: 1.0625rem;
+      width:11.375rem;
+      flex: 1;
+      display: inline-block;
+
+      @include viewports(up-to small) {
+        display: none;
+      }
+      svg
+      {
+        height: 100%;
+        //width: 100%;
+        display: block;
+      }
+    }
+
+    h1
+    {
+      font-size: 1.5rem;
+      line-height: 1;
+      display: inline-block;
+      flex: 1.75;
+      text-align: left;
+      //width:100%;
+      top: 1.25rem;
+      //position: absolute;
+      @include viewports(up-to tiny) {        
+        font-size: 1rem;
+      }
+      @include viewports(aove large) {
+        padding-left: 8%;
+      }
+      @include viewports(up-to small) {
+        text-align: left;
+        position: static;
+        max-width: 90%;
+      }
+    }
+
+
+  }
+
+  .topBar > * {
+    flex: 1 100%;
+  }
+
+  .mapArea
+  {
+    max-width: 80%;
+    max-height: 50vh;
+    margin:4rem auto 10vh;
+
+    @include viewports(up-to small) {
+      margin-top: 4rem;
+      max-width:100%;
+      overflow: visible;
+    }
+    @include viewports(up-to large) {
+      max-width: 80%;
+      max-height: 44vh;
+      margin:4rem auto 10vh;
+    }
+    @include viewports(up-to tiny) {
+      margin-top:8vh;
+      max-height: 20vh;
+      margin-bottom:4vh;
+    }
+    @include viewports(up-from huge) {
+      max-width: 70%;
+    }
+  }
+  #map
+  {
+    max-height: 40vh;
+
+    @include viewports(up-from medium) {
+      max-height: 50vh;
+    }
+    @include viewports(up-to tiny) {
+      max-height: 25vh;
+    }
+    @include viewports(up-to small) {
+      max-height: 45vh;
+      overflow: visible
+    }
+    .number
+    {
+      rect {
+        fill: none;
+      }
+      text {
+        fill:#0B1560;
+        font-family: 'Amplitude Bold';
+
+        @include viewports(up-to small) {
+          font-size:1.9rem;
+
+          transform:translate(0, 3px);
+        }
+      }
+
+      &.active
+      {
+        rect {
+          fill: #0B1560;
+        }
+        text {
+          fill:#FFF;
+        }
+      }
+    }
+  }
+  nav
+  {
+    width: 100%;
+
+    @include viewports(up-from large) {
+      max-width: 78.75rem;
+      margin: 0 auto;
+    }
+  }
+
+  ol {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    align-items: center;
+    justify-content: center;
+
+    @include viewports(up-to tiny) {
+      display: block;
+    }
+
+    li {
+      display: block;
+      text-align: left;
+      text-transform: uppercase;
+      color: #fff;
+      margin:0 .125rem;
+      height: 100%;
+      @include viewports(up-to tiny) {
+        margin-bottom:5px;
+        padding-right: 1rem;
+      }
+
+        a {
+        color: #0b1560;
+        text-decoration: none;
+        font-family: 'Amplitude Book';
+        padding: (7rem/16) (15rem/16);
+        border-radius: 1px;
+        border: solid 1px #d9d8d8;
+        background: #fff;
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: (18rem / 16);
+        line-height: inherit;
+        
+        @include viewports(up-to medium) {
+          font-size: 0.85rem;
+          line-height: 0.95rem;
+        }
+
+        @include viewports(up-to small) {
+          font-size: 0.75rem;
+        }
+
+        span{
+          @include viewports(among small) {
+            display: block;
+            padding: 0.1rem 0;
+          }
+          @include viewports(among medium) {
+            display: block;
+            padding: 0.1rem 0;
+          }
+
+        }
+        
+        &:hover, &.active
+        {
+          background: #0b1560;
+          color: #fff;
+          font-family: 'Amplitude Bold';
+          padding-right: 5px;
+        }
+
+      }
+    }
+  }
+
+
+
+  footer
+  {
+    position: absolute;
+    bottom:0;
+    left:0;
+    right: 0;
+
+
+
+  }
+  .info
+  {
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:center;
+
+    @include viewports(up-to small) {
+      background: #eef0f3
+    }
+
+    @include viewports(up-from large) {
+      
+      padding: 0 15%;
+    }
+
+    &.info
+    {
+      background: #eef0f3;  
+      @include viewports(up-to small) {
+        display: none;
+      }
+    }
+    
+    img
+    {
+      float: left;
+      margin-right: 6rem;
+      width: 1.5rem;
+      height: 1.5rem;
+
+      @include viewports(up-to small) {
+        display: none;
+      }
+    }
+    ul {
+      margin: .8rem 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr .8fr;
+      grid-gap:1rem;
+      font-family: 'Amplitude Light';
+      color: #1e1e1e;
+
+      @include viewports(up-from large) {
+        margin: .8rem 0;
+      }
+      @include viewports(up-to small) {
+        display: block;
+      }
+
+      li
+      {
+        text-align: left;
+        line-height: 1.13;
+        font-size: 0.94rem;
+
+        @include viewports(up-to small) {
+          line-height: 1.125rem
+        }
+
+        span {
+          font-family: Amplitude Bold;
+          margin-right: .2rem;
+        }
+      }
+    }
+    a{
+      color:#1e1e1e;
+      text-decoration: none;
+
+      &:hover
+      {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .contact
+  {
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:center;
+
+    @include viewports(up-to small) {
+      background: #eef0f3
+    }
+
+    @include viewports(up-from large) {
+      
+      padding: 0 15%;
+    }
+    ul {
+      margin: .8rem 0;
+      width: 100%;
+      display: grid;
+      grid-gap:1rem;
+      font-family: 'Amplitude Light';
+      color: #1e1e1e;
+
+      @include viewports(up-from large) {
+        margin: .8rem 0;
+      }
+      @include viewports(up-to small) {
+        display: block;
+      }
+
+      li
+      {
+        text-align: center;
+        line-height: 1.13;
+        font-size: 0.94rem;
+
+        @include viewports(up-to small) {
+          line-height: 1.125rem
+        }
+
+        span {
+          font-family: Amplitude Book;
+          font-weight: 800;
+          color:#0B1560;
+          margin-right: .2rem;
+        }
+      }
+    }
+  }
+
+ &.opened {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity .2s ease;
+  }
+}

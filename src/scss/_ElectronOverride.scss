@@ -1,0 +1,46 @@
+html.electron {
+  /*h1 {
+    font-size: 5.5rem;
+    line-height: 6rem;
+  }
+
+  font-size: 10px;
+  body {
+    font-size: 10px;
+  }*/
+
+  .Navigation {
+    bottom: 0;
+    max-width: 80%;
+
+    a, button {
+      font-size: 0.9rem;
+    }
+  }
+  .Hero {
+    bottom: 60px;
+  }
+
+  .special-card-left  {
+    width: 32%;
+    max-width: auto;
+    min-width: auto;
+    left: 10%;
+    bottom:10vh;
+    top:auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .Welcome
+  {
+
+    .PageContent {
+
+      article
+      {
+        max-width:40%;
+      }
+    }
+  }
+}

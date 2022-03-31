@@ -1,0 +1,86 @@
+$finnairBlue: #0b1560;
+
+$VIEWPORTS_CONFIG:
+    up-to 480px it-is "tiny",
+    up-to 800px it-is "small",
+    up-to 1200px it-is "medium",
+    up-to 1800px it-is "large",
+    up-to 3800px it-is "huge",
+    beyond-that it-is "massive";
+
+@import 'reset';
+@import 'viewports';
+@import 'Text';
+@import 'Buttons';
+@import 'Overlay';
+@import 'Navigation';
+@import 'Hotspot';
+@import 'HotspotContent';
+@import 'Hero';
+@import 'Admin';
+@import 'Welcome';
+@import 'Map';
+@import 'ElectronOverride';
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -ms-content-zooming: none;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  height: 100vh;
+}
+
+body {
+  background-color: #ffffff;
+
+}
+
+#marzipano {
+  background-color: #ffffff;
+  position: fixed;
+  top: -99999px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.marzipano {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  #marzipano {
+    top: 0;
+  }
+}
+
+.PageContent {
+  max-width: 80%;
+  width: 1200px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
+
+.CloseBtn {
+  cursor:pointer;
+  display: block;
+}
+
+.js-consent-popup-overlay,
+.js-consent-popup-content,
+.cookie-consent-wrapper.consent-popup--show {
+  z-index: 9999 !important;
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="186" height="161" viewBox="0 0 186 161">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#0B1560" stroke-linecap="square" d="M.5 145.096H185"/>
+        <path stroke="#8E8E8E" stroke-dasharray="1,2" d="M.5 26.56H185"/>
+        <path fill="#0B1560" d="M11 58.442h22.074v86.655H11zM60 42.909h22.074v102.187H60zM107 29.829h22.074v115.267H107zM154 25.742h22.074v119.355H154z"/>
+        <text fill="#1E1E1E" font-family="Amplitude-Regular, Amplitude" font-size="12" transform="translate(0 -14)">
+            <tspan x="59.644" y="168.484">2016</tspan>
+        </text>
+        <text fill="#1E1E1E" font-family="Amplitude-Regular, Amplitude" font-size="12" transform="translate(0 -14)">
+            <tspan x="11.034" y="168.484">2015</tspan>
+        </text>
+        <text fill="#1E1E1E" font-family="Amplitude-Regular, Amplitude" font-size="12" transform="translate(0 -14)">
+            <tspan x="107.064" y="168.484">2017</tspan>
+        </text>
+        <text fill="#1E1E1E" font-family="Amplitude-Regular, Amplitude" font-size="12" transform="translate(0 -14)">
+            <tspan x="153.686" y="168.484">2018</tspan>
+        </text>
+        <text fill="#0B1560" font-family="Amplitude-Light" font-size="20" font-weight="300" transform="translate(0 -14)">
+            <tspan x="139.78" y="16">+34%</tspan>
+        </text>
+        <text fill="#1E1E1E" font-family="Amplitude-Regular, Amplitude" font-size="12" transform="translate(0 -14)">
+            <tspan x="1" y="21.817">DAILY VOLUMES</tspan>
+        </text>
+    </g>
+</svg>

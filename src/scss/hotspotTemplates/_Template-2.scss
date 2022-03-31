@@ -1,0 +1,107 @@
+// With or without top image + content image on left + full-width tables
+.Template-2
+{
+  section:first-child
+  {
+    > *
+    {
+      float: right;
+      max-width: 30%;
+    }
+    img, svg
+    {
+      max-width: 64%;
+      float: left;
+      margin-right: 6%;
+    }
+  }
+  img.handling-code{
+    width: 93px;
+    height: 61px;
+    margin: 0px 22px; 
+  }
+  section.wider
+  {
+    padding: 40px 15px 20px;
+  }
+  section.table-header
+  {
+    background: #eef2f9;
+    line-height: 1.25;
+  }
+  table
+  {
+    border-collapse: separate;
+    width: 100%;
+    .small{
+      width: 63px;
+      height: 48px;
+      margin: 0 22px;
+    }
+
+    svg
+    {   
+      width: 93px;
+      height: 61px;
+      margin: 0 22px;
+    }
+    th
+    {
+      background: #f0f4f6;        
+      border-bottom:2px solid rgba(#fff, 0.8);      
+      font-family: 'Amplitude Medium';
+      padding: 0.625rem 1.125rem 1.25rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    td
+    {
+      padding: 0.8rem;
+      background-color: #f4f4f4;
+      vertical-align: middle;
+      border-bottom:2px solid rgba(#fff, 0.8);
+
+      .number
+      {
+        color: #1c0072;
+        font-family: 'Amplitude Light';
+        font-size: 1.875rem;
+      }
+      &:first-child
+      {
+        padding-right: 0;
+      }
+    }
+    tr:last-child td
+    {
+
+      border-bottom:none
+    }
+    p
+    {
+      margin-top: 0;
+    }
+    strong
+    {
+      font-family: 'Amplitude Bold';
+    }
+  }
+  figure
+  {
+    padding: 10px 0;
+
+    svg
+    {
+      max-width: 100%;
+    }
+
+    figcaption {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      padding: 5px 40px 0;
+      @include viewports(up-to small) {
+        padding-left:8%;
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+// figure (image) with captions on top, text content with grey background & images on right side
+.Template-5 
+{
+  figure
+  {
+    padding: 0;
+    position: relative;
+
+    img
+    {
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption
+    {
+      width: 100%;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      line-height: 1.29;
+      margin-top: 2px;
+      padding: 9px 32px;
+      background: #f0f4f6;
+
+      ul
+      {            
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        list-style-type:none;
+      }
+      li
+      {
+        position: relative;
+        padding-left: 20px;
+        max-width:55%;
+        
+        &:before
+        {
+          content: "•";
+          font-size: 1.69rem;
+          position: absolute;
+          left: 0;
+        }
+        
+        &.full-content{
+          max-width:100%;
+        }
+
+        &.pink:before
+        {
+          color: #ba4a9e;
+        }
+        &.grey:before
+        {
+          color: #8c8c8c;
+        }
+      }
+    }
+
+    &.left // the content images on the left side
+    {
+      // width: 48%; // needed if grid doesn't work
+      float: left;
+
+      img
+      {
+       // margin-bottom: 100% / 48% * 2%; // needed if grid doesn't work
+
+        &:last-child {
+          margin-bottom: 0
+        }
+      }
+    }
+  }
+  .right
+  {
+    // width: 50%;
+    float: right;
+    background: #f4f4f4;
+    padding: 23px 17px 18px 21px;      
+  }
+
+  // possibly useful to use grid - if not, remove this & uncomment styles from above
+  section.wider
+  {
+    display: grid;
+    grid-template-columns: 1fr 54%;
+    grid-gap: 9px;
+
+    figure
+    {
+      grid-column: 1 / 2;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-gap:9px;
+    }
+
+    div
+    {
+      grid-column: 2 / 3;
+    }
+  }
+  // end of grid styles //
+}

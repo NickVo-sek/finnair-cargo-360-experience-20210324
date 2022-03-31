@@ -1,0 +1,259 @@
+button, .button
+{
+  border: none;
+  background: none;
+  cursor: pointer;
+  background: rgba(#0B1560, 0.8);
+  color: #fff;
+  font-family: 'Amplitude Bold';
+
+  &:focus, &:hover
+  {
+    border:none;
+    outline:none;
+  }
+}
+
+.CloseBtn {
+  position: absolute;
+  right: 15px;
+  font-size: 20px;
+  z-index:100;
+  color: #808080;
+}
+
+.NextBtn, .PrevBtn
+{
+  background: none;
+  border:none;
+  padding:0 5%;
+  color: #0b1560;
+  text-transform: uppercase;
+  font-family: 'Amplitude Book';
+
+  letter-spacing: 1px;
+  position: absolute;
+  bottom:1.65vh;
+
+  svg
+  {
+    display: inline-block;
+    width: 4.2vh;
+    height:4.2vh;
+    vertical-align: top;
+    margin-right:10px;
+  }
+  span
+  {
+    font-size: 12px;
+    line-height: 4.2vh;
+  }
+}
+.NextBtn {
+  right:0;
+  @include viewports(up-from medium) {
+    right:1.9rem;
+  }
+
+  svg
+  {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+}
+.PrevBtn
+{
+  left:0;
+  @include viewports(up-from medium) {
+    left:1.9rem;
+  }
+}
+.OverlayCard {
+  .NextBtn, .PrevBtn
+  {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg
+    {
+      width: auto;
+      height: auto;
+
+      @include viewports(up-to small) {
+        width: 2.5rem;
+      }
+      @include viewports(among medium) {
+        width: 3rem;
+      }
+      @include viewports(up-to tiny) {
+        width: 1rem;
+      }
+      @media (max-height: 400px) {
+        height: 20vh;
+      }
+    }
+  }
+  .PrevBtn
+  {
+    left: 0;
+    @include viewports(up-from large) {
+      left:2rem;
+    }
+    @include viewports(among medium) {
+      left:3.5rem;
+    }
+  }
+  .NextBtn {
+    right: 0;
+    @include viewports(up-from large) {
+      right:2rem;
+    }
+    @include viewports(among medium) {
+      right:3.5rem;
+    }
+  }
+}
+.OverlayVideo, .OverlayMap
+{
+  .CloseBtn {
+
+    padding: 1.3125rem;
+    color: #fff;
+    font-family: 'Amplitude Book';
+    opacity: 0;
+    animation:slideIn .5s ease-in forwards .5s;
+    background: none;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    right:0;
+    @include viewports(up-from small) {
+      right:1rem;
+    }
+    .icon
+    {
+      height: 1.125rem;
+      width:1.125rem;
+
+      svg
+      {
+        float:right;
+      }
+    }
+    .label
+    {
+      display: none;
+    }
+
+    @include viewports(up-from large) {
+      border-radius:1.25rem;
+      line-height: 2.125rem;
+      border: 0.0625rem solid #fff;
+      padding: 0 0.9375rem;
+      margin-top: 0.625rem;
+      .label
+      {
+        display: inline;
+      }
+      .icon
+      {
+        display: none;
+      }
+
+      &:after
+      {
+        content:'✕';
+        margin-left: 0.625rem;
+        font-size: 1.25rem;
+        vertical-align: top;
+      }
+    }
+
+  }
+}
+.OverlayMap{
+  .CloseBtn {
+    border-color: #0b1560;
+    color: #0b1560;
+    @include viewports(up-to medium) {
+      top: 0;
+      margin: 0;
+      right: 0;
+    }
+  }
+}
+.cta
+{
+  border-radius: 0em;
+  padding: 1em 2em;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  flex: 0 0 100%;
+  margin-top: 2.5rem;
+  @include viewports(up-to huge){
+    font-size: 1.8rem;
+  }
+  @include viewports(up-to medium){
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  @media (max-height: 400px) {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+.map button {
+  padding: 0.975rem 1rem !important;
+  background: none;
+  color:#0b1560;
+
+  .burger
+  {
+    height:1.8rem;
+    width:1.8rem;
+    svg
+    {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+  .labeled
+  {
+    display: none;
+  }
+
+  @include viewports(up-from large) {
+    margin-left:2px;
+    padding: 9px 10px !important;
+    text-transform: uppercase;
+
+    .burger
+    {
+      display: none;
+    }
+    .labeled
+    {
+      display: inline-block;
+    }
+    img
+    {
+      display: inline-block;
+      margin-right: .5em;
+      vertical-align: top;
+      height: 1em;
+      width: 10px;
+    }
+  }
+}
+@keyframes slideIn {
+  0%{
+    opacity:0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

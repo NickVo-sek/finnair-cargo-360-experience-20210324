@@ -1,0 +1,111 @@
+// image at top, content image/table at right
+.Template-7 
+{
+  section
+  {
+    .fit-container{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      padding: 0;
+      margin: 0;
+      table{
+        td{
+          flex: 1
+        }
+      }
+
+    }
+    table {
+      border-collapse: separate;
+      border-spacing:2px;
+      font-size: (12rem / 16);
+      line-height: 1.5;
+      text-transform: uppercase;
+      margin-bottom:1.25rem;
+      margin-left: 2%;      
+      width: 48%;
+      float: right;
+
+      @include viewports(up-to small) {
+        width: 100%;
+        max-width: 100%;
+        margin-left:0;
+      }
+
+      th, td
+      {    
+        padding: 14px 27px;
+        text-align: center;
+        vertical-align: middle;
+        text-align: center;
+      }
+      td
+      {    
+        padding: 5px 27px 36px;
+      }
+      .number
+      {    
+        font-family: 'Amplitude Bold';
+        font-size:5rem;
+        color: #16086d;
+        display: block;
+        line-height: 1.2;
+        padding-top: 1rem;
+      }
+      .unit { font-size: 0.4em }
+      .sub-text { 
+        font-size: 1.2rem; 
+        display: block; 
+        margin-bottom: 1.2rem 
+      }
+      .text
+      {    
+        font-family: 'Amplitude Bold';
+        font-size:1.6rem;
+        color: #16086d;
+        display: block;
+      }
+    }
+
+    &:first-of-type
+    {
+      padding-bottom: 0;
+    }
+    h2
+    {
+      margin: 1.8rem 0 0;
+    }
+    img, svg
+    {     
+      width: 48%;
+      float: right;
+
+      @include viewports(up-to small) {
+        width: auto;
+        max-width: 100%;
+      }
+    }
+    img, svg, table {
+      + div
+      {       
+        padding: 0.875rem (21rem / 16) 0 0;
+
+        @include viewports(up-to small) {
+          float: left;
+          width: auto;
+          max-width: 100%;
+        }
+        p.table-title{
+          padding-bottom: 0
+        }
+
+        ul
+        {
+          list-style-position: outside;
+          margin-top: 0
+        }
+      }
+    }
+  }  
+}

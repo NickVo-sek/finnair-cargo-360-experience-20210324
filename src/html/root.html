@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="<%= htmlWebpackPlugin.options.environment.VERSION === 'ELECTRON' ? 'electron' : 'web'%>">
+<head>
+  <title>Finnair COOL cargo terminal 360° experience</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Step inside the world of Finnair cargo for a 360 degree, behind the scenes look at our COOL cargo terminal in Helsinki – one of the most modern cargo terminals in Europe." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FinnairCargo360">
+
+  <link rel="icon" href="<%= require('../img/Cargo_favicon_310x310.png') %>">
+  <link rel="apple-touch-startup-image" href="img/splash.png">
+
+  <meta property="og:title" content="Finnair COOL cargo terminal 360° experience">
+  <meta property="og:description" content="Step inside the world of Finnair cargo for a 360 degree, behind the scenes look at our COOL cargo terminal in Helsinki – one of the most modern cargo terminals in Europe.">
+  <meta property="og:image" content="<%= require('../img/Cargo_FB_thumbnail.jpg') %>">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Finnair COOL cargo terminal 360° experience">
+  <meta name="twitter:description" content="Step inside the world of Finnair cargo for a 360 degree, behind the scenes look at our COOL cargo terminal in Helsinki – one of the most modern cargo terminals in Europe.">
+  <meta name="twitter:image" content="https://cargo.finnair.com/coolterminal360/<%= require('../img/Cargo_FB_thumbnail.jpg') %>">
+  <meta name="twitter:domain" content="https://cargo.finnair.com">
+
+  <link rel="apple-touch-icon" href="img/touch_80x80.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/touch_152x152">
+  <link rel="apple-touch-icon" sizes="167x167" href="img/touch_167x167">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/touch_180x180">
+
+  <style>@-ms-viewport { width: device-width; }</style>
+  <link rel="stylesheet" href="main.css" type="text/html">
+
+  <style>
+    <%= require('css-loader!../cookie/style.min.css') %>
+  </style>
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-T97QQMZ');
+  </script>
+  <!-- End Google Tag Manager -->
+</head>
+<body>
+  <div id="react"></div>
+  <div id="marzipano"></div>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T97QQMZ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <%= require('html-loader!../cookie/cookie-consent.html') %>
+</body>
+</html>

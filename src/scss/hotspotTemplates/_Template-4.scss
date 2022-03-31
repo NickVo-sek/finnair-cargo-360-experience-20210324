@@ -1,0 +1,38 @@
+// smaller images alternate on left & right, large full-width image 
+.Template-4
+{
+  img, svg { 
+    &.full-width {
+      background: #eef2f9;
+    }
+  }
+  section
+  {
+    img, svg
+    {      
+      max-width: 35%;
+      float: left;
+      margin-right: 6%;
+
+      + div
+      {
+        width:59%;
+        float: right;
+      }          
+    }
+    &:nth-of-type(even) {
+      img, svg
+      {
+        float: right;
+        margin-left:6%;
+        margin-right: 0;
+
+        + div
+        {
+          width:59%;
+          float: left;
+        }   
+      }
+    }
+  }
+}

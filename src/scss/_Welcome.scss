@@ -1,0 +1,205 @@
+.Welcome {
+  .fold {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: center;
+  }
+  &.no-scroll
+  {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .ctaButton {
+    font-size: 2.125rem;
+    padding: 2rem 4rem;
+    margin: 3.75rem 0 0 0;
+    background: rgba(#0B1560, 1);
+  }
+
+  .Navigation
+  {
+    position: absolute;
+    top: 0;
+
+    @include viewports(up-from large) {
+      display: none;
+    }
+  }
+  .PageTopNavi
+  {
+    background: #eef0f3;
+    width: 100%;
+    margin: 0 auto;
+    padding: .5rem .5rem .7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #0B1560;
+    font-family: Amplitude Bold;
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    @include viewports(up-to medium) {
+      padding-top:4.5rem;
+    }
+    .map button
+    {
+
+      font-family: Amplitude Light;
+      background: rgba(#fff, .95);
+      padding: .375rem 2rem !important;
+      box-shadow: 0 .125rem .25rem 0 rgba(0, 0, 0, 0.23);
+      @include viewports(up-to medium) {
+        display: none;
+      }
+    }
+
+  }
+  .PageHeadBand{
+    background: #fff;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5vh 2rem 2.5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .cargoLogo
+    {
+      
+      max-width:15.44rem;
+      height: 1.4375rem;
+
+      svg
+      {
+        height: 100%;
+        width: 100%;
+        display: block;
+      }
+    }
+    .threesixtyLogo
+    {
+      height: 3rem; 
+      width: 7.25rem;
+      display: inline-block;  
+
+      svg
+      {
+        height: 100%;
+        width: 100%;
+        display: block;
+      }
+    }      
+
+    @include viewports(up-to medium) {
+      display: none;
+    }
+  }
+
+  .PageHeader {
+    background: url('./../img/welcome/finnair-7620.jpg') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 auto;
+
+    h1 {
+      text-shadow: 3px 3px 9px rgba(0, 0, 0, 0.2);
+      color:#fff;
+      font-size: 4.375em;
+      line-height: 1;
+    }
+
+    .PageHeaderContent {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      img.arrow
+      {
+        margin: auto;
+        padding-top: 10px;
+        animation: blink 4s ease-in-out;
+        animation-delay: 5s;
+        animation-iteration-count: infinite;
+        opacity: 0;
+      }
+      @include viewports(up-to medium) {
+        padding-top: 10vh;
+      }
+      @include viewports(up-from large) {
+        padding-bottom: 10vh;
+      }
+    }
+
+    .ReadMore {
+      padding: 20px 0 10px 0;
+      width: 100%;
+      align-self: flex-end;
+      background: rgba(#ffffff, 0.5);
+      text-align: center;
+      font-family: 'Amplitude Bold';
+      color: #0b1560;
+
+      a {
+        color: #0b1560;
+        text-decoration: none;
+      }
+      svg
+      {
+        height: .625rem;
+      }
+      span {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .PageContent {
+    padding-top:6.25rem;
+    padding-bottom: 6.25rem;
+    color: #0b1560;
+
+    h2 {
+      font-family: 'Amplitude Bold';
+    }
+    article
+    {
+      max-width: 70%;
+      margin: 0 auto;
+      font-size: 1.5rem;
+
+      p {
+        line-height: 1.25;
+
+        &:last-child
+        {
+          padding-bottom: 0;
+        }
+      }
+    }
+    .liftups {
+      display: flex;
+      margin: 30px 0 ;
+      justify-content: space-between;
+      max-width: 100%;
+
+      > * {
+        width: 33%;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+
+    button {
+      display: block;
+      margin: 5rem auto;
+    }
+  }
+
+}

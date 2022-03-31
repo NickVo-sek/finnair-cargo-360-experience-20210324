@@ -1,0 +1,52 @@
+// full-width table, wider on mobile
+.Template-6
+{
+
+  table {
+    padding: 0;
+
+    tr:first-child
+    {
+      th, td {
+        background: #eef2f9;
+      }
+    }
+
+    th {
+      font-family: Amplitude Book;
+      line-height: 1.25;
+      padding: 36px 20px 32px;
+      text-align: left;
+      @include viewports(up-to small)
+      {
+        width: 95vw;
+      }
+    }
+
+    td
+    {
+      padding: 0;
+      background: none;
+    }
+
+    img, svg { 
+
+      &.full-width
+      {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin:0;
+
+        &.mobile-scrollable
+        {
+          height: auto;
+          @include viewports(up-to small) {
+            width: auto;
+            max-width: none;
+          }
+        }
+      }
+    }
+  }
+}

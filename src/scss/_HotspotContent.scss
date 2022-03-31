@@ -1,0 +1,300 @@
+$navHeight: 70px;
+.hotspot-content-dimmer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  overflow: hidden;
+  z-index: 1;
+  background: transparent;
+}
+
+html body .special-card {
+  box-shadow: none;
+
+  &-right {
+    right: 0;
+  }
+  &-left {
+    height: 100%;
+    padding: 50px 0 10px; // height of the navigation + small margin
+    overflow: hidden;
+    width: 40%;
+    margin: 0 auto;
+    left: 10px;
+    max-width: 582px;
+    position: absolute;
+
+    @include viewports(up-to medium) {
+      padding: 70px 0 10px; // height of the navigation + small margin
+    }
+
+    @include viewports(up-to small) {
+      $margin: 1.2%;
+      width: 100 - $margin * 2;
+      left: $margin;
+    }
+    @include viewports(up-from medium) {
+      min-width: 480px;
+    }
+    @media (max-height: 400px) {
+      width: 60%;
+
+      h1 {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &-contentwrapper {
+    background: #fff;
+    padding: 15px 0 0;
+    box-shadow: 1px 1px 20px 1px rgba(0,0,0,0.2);
+    height: 100%;
+  }
+
+  h1 {
+    color: #0b1560;
+    font-size: 1.25rem;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
+    padding: 0 35px 15px 30px;
+    z-index: 1;
+    transition: 0.5s opacity ease-in;
+  }
+
+  nav {
+    background: #fff;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.22), 0 -2px 3px 0 rgba(0, 0, 0, 0.15);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: $navHeight;
+    margin-top: -$navHeight;
+    z-index: 1;
+
+    .hotspot-nav-PrevBtn,
+    .hotspot-nav-NextBtn {
+      background: none;
+      border: none;
+      color: #0b1560;
+      text-transform: uppercase;
+      font-family: 'Amplitude Book';
+      letter-spacing: 1px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 15px 20px;
+
+      svg {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        vertical-align: top;
+      }
+
+      span {
+        font-size: 12px;
+        line-height: 16px;
+        padding: 10px 20px;
+      }
+    }
+
+    .hotspot-nav-PrevBtn {
+      padding-right: 0;
+      span {
+        padding-right: 0;
+      }
+    }
+    .hotspot-nav-NextBtn {
+      padding-left: 0;
+      span {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .template {
+    height: 100%;
+    padding-bottom: $navHeight;
+    overflow: hidden;
+
+    > * {
+      overflow: hidden;
+      height: 100%;
+    }
+  }
+  .content {
+    width: 100%;
+    padding-bottom: 60px;
+    overflow: auto;
+    height: 100%;
+    transition: 0.5s opacity ease-in;
+
+    * {
+      -moz-user-select: text;
+      -webkit-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    > div > * {
+      padding: 30px;
+    }
+    section {
+      display: block;
+      clear: both;
+
+      &.wider {
+        padding: 15px;
+      }
+    }
+    .vertically-centered {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    p, ul {
+      line-height:1.25rem;
+    }
+    ul {
+      list-style-type: disc;
+      margin-left:15px;
+      display: block;
+
+      &.checkbox
+      {
+        list-style-type: none;
+        margin-left: 0;
+        li
+        {
+          background: url(../img/checkbox.svg) no-repeat 0 0;
+          background-size: 1.125rem 1.125rem;
+          padding-left: 1.875rem;
+        }
+        &.multiline
+        {
+          li
+          {
+            margin-top: 1rem;
+            vertical-align: top;
+            background-position: 0 3px;
+          }
+        }
+        &.green
+        {
+          display: flex;
+          align-items: flex-start;
+          margin: 0;
+
+          /* Using pseudo elements with space-between because space-evenly wont work (or be ignored) on Edge & Safari: */
+          justify-content: space-between;
+
+          &:before,
+          &:after {
+            content: '';
+            display: block;
+          }
+          /* --- */
+
+          @include viewports(up-to small) {
+            display: block;
+          }
+
+          li
+          {
+            min-width: 25%;
+            max-width: 124px;
+            padding: 50px 5px 0;
+            background: url(../img/checkbox-green.svg) no-repeat center top;
+            text-align: center;
+
+            @include viewports(up-to small) {
+              width: auto;
+              max-width: 100%;
+              padding: 40px 40px 20px;
+            }
+          }
+        }
+      }
+    }
+    li{
+      padding-left: 5px;
+      line-height: 1.4rem;
+    }
+    ol
+    {
+     margin-left: 14px;
+    }
+    h2
+    {
+      font-family: 'Amplitude Medium';
+      font-size: 1rem;
+      margin-bottom: 1em;
+      line-height: 20px;
+    }
+    h3
+    {
+
+      margin: 1.5em 0;
+    }
+    img, svg, video
+    {
+      object-fit: contain;
+      display: block;
+
+      &.full-width
+      {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+
+    }
+
+
+    table
+    {
+      border-collapse: separate;
+
+      svg
+      {
+        background: none !important;
+        object-fit: contain;
+        max-width: none;
+      }
+      th
+      {
+        background: #f0f4f6;
+      }
+      td
+      {
+        padding: 1.25rem;
+        background-color: #f4f4f4;
+      }
+      p
+      {
+        margin-top: 0;
+      }
+      strong
+      {
+        font-family: 'Amplitude Bold';
+      }
+    }
+  }
+
+  @import 'hotspotTemplates/Template-1';
+  @import 'hotspotTemplates/Template-2';
+  @import 'hotspotTemplates/Template-3';
+  @import 'hotspotTemplates/Template-4';
+  @import 'hotspotTemplates/Template-5';
+  @import 'hotspotTemplates/Template-6';
+  @import 'hotspotTemplates/Template-7';
+}

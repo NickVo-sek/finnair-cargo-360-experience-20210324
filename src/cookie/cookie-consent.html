@@ -1,0 +1,820 @@
+
+<div class="js-consent-popup cookie-consent-wrapper consent-popup__main">
+  <div class="js-consent-popup-overlay consent-popup" tabindex="0" role="dialog">
+    <div class="js-consent-popup-content consent-popup__content" tabindex="-1">
+      <div class="js-consent-popup-main consent-popup__slide">
+        <div class="consent-initial__main">
+          <i class="icon-finnair consent-popup__icon" aria-hidden="true"></i>
+          <h2 class="consent-popup__heading">We care about your privacy</h2>
+
+          <div class="consent-initial__paragraph-wrapper">
+            <p class="consent-popup__paragraph">
+              <span class="first_para">We use cookies to improve your user experience.</span> Cookies are small text files that are saved in your browser. Some cookies are always on, as they are necessary
+              for the website to work properly. We will also use cookies for analytical purposes and to offer you personalised content and relevant advertising, please read more in our <a href="#" class="js-consent-open-policy consent-popup__link">Cookie Policy.</a>
+
+            </p>
+
+            <p>By continuing to browse the website, you agree to our use of cookies. You can change your cookie preferences at any time. </p>
+          </div>
+
+          <div class="consent-initial__clickables">
+            <button type="button" class="js-consent-agree-to-all consent-popup__button">Close</button>
+
+            <p class="consent-popup__paragraph">
+              <a href="javascript:void(0);" class="js-consent-popup__setting">Change your cookie preferences</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="js-consent-popup-details consent-popup__slide">
+        <i class="icon-finnair consent-popup__icon" aria-hidden="true"></i>
+        <h2 class="consent-popup__heading">We care about your privacy</h2>
+        <p class="consent-popup__paragraph">Below you can select which cookies you allow us to use. You can change your preferences at any time by clicking on the “Set your Cookie preferences” link at the bottom of each web page.</p>
+        <p class="consent-popup__paragraph">You can find out more about how we collect and process your personal data in the  <a href="#" class="consent-popup__link">Cookie Policy.</p>
+
+          <p class="consent-popup__paragraph subheading-consents__paragraph">Please adjust the slider to confirm your cookie settings</p>
+
+          <form class="consent-slider__wrapper">
+            <div class="consent-slider__main-container">
+              <div class="js-consent-sliders__container consent-sliders__container">
+                <div class="js-consent-slider__bg consent-slider__bg"></div>
+                <fieldset class="fieldset-unstyled">
+                  <legend class="is-vishidden">Select your consents</legend>
+                  <div class="js-consent-slider__container consent-slider">
+                    <input type="radio" name="consent-input-group" id="consent-input-0" class="js-consent-slider__input consent-slider__input" aria-labelledby="consent-label-0" value="0">
+                  </div>
+                  <div class="js-consent-slider__container consent-slider">
+                    <input type="radio" name="consent-input-group" id="consent-input-1" class="js-consent-slider__input consent-slider__input" aria-labelledby="consent-label-1" value="1">
+                  </div>
+                  <div class="js-consent-slider__container consent-slider">
+                    <input type="radio" name="consent-input-group" id="consent-input-2" class="js-consent-slider__input consent-slider__input" aria-labelledby="consent-label-2" value="2">
+                  </div>
+                  <div class="js-consent-slider__container consent-slider">
+                    <input type="radio" name="consent-input-group" id="consent-input-3" class="js-consent-slider__input consent-slider__input" aria-labelledby="consent-label-3" value="3">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="js-consent-popup__info-container consent-popup__info-container" aria-hidden="true"></div>
+            <button type="button" class="js-consent-collect-consents consent-popup__button">Confirm settings</button>
+          </form>
+          <!-- END of consent-slider__wrapper -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var Finnair = window.Finnair || {};
+
+    //Dev
+    var mockData = null
+    /*var mockData = {
+      "consentGroup": "f-cookies",
+      "introductionText": "<p>Automatically enabled functional cookies are required to enable website functionalities when using the site.</p>",
+      "afterwordText": "<p></p>",
+      "consents": [
+        {
+          "consentTextId": "f-cookies-analytics",
+          "effectiveFrom": 1522540800000,
+          "text": "<p>Website analytics cookies will help us to improve the usability and digital experience of our site (based on usage).</p>",
+          "textHash": "GVv/L4kAKc43G4fY7odkGIDEDVD82/+hP3TMfHdiF2w=",
+          "consentStatus": "accepted"
+        },
+        {
+          "consentTextId": "f-cookies-personalization",
+          "effectiveFrom": 1522540800000,
+          "text": "<p>Content personalization cookies help us to personalize content and provide you with more relevant information and offers based on your usage of Finnair services.</p>",
+          "textHash": "pNhCiZjRrHY9Mbc+BGxupKT3/KHBxKmJIaMHAZKnNTg=",
+          "consentStatus": "accepted"
+        },
+        {
+          "consentTextId": "f-cookies-advertising",
+          "effectiveFrom": 1522540800000,
+          "text": "<p>Advertising cookies are used by Finnair and third parties to serve ads that are relevant to your interests on other websites and -services.</p>",
+          "textHash": "KjYwi1W8+NXaH6TMGbILJBg6mcph0MwJARosEMpp5g4=",
+          "consentStatus": "withdrawn"
+        }
+      ]
+    };*/
+
+    var ConsentModule = (function() {
+      var popUp = document.querySelector('.js-consent-popup'),
+      popUpOverlay = document.querySelector('.js-consent-popup-overlay'),
+      popupContent = document.querySelector('.js-consent-popup-content'),
+      mainContent = document.querySelector('.js-consent-popup-main'),
+      detailsContent = document.querySelector('.js-consent-popup-details'),
+      agreeButton = document.querySelector('.js-consent-collect-consents'),
+      agreeToAllButton = document.querySelector('.js-consent-agree-to-all'),
+      settingButton = document.querySelector('.js-consent-popup__setting'),
+      sliderContainer = document.querySelector('.js-consent-sliders__container'),
+      closePolicyButton = document.querySelector('.js-consent-close-policy'),
+      radioInputs = document.querySelectorAll('.js-consent-slider__input'),
+      apiContainer = document.body.querySelector('.js-consent-popup__info-container'),
+      sliderBG = document.querySelector('.js-consent-slider__bg');
+
+      mainContent.style.display = 'block';
+      detailsContent.style.display = 'none';
+
+      window.dataLayer = window.dataLayer || [];
+
+      var initialState = {
+        index: 3,
+        isAffirmativeSet: false
+      }
+
+      var gaSendEvent = function(labelVal) {
+        return {
+          'event': 'send-event',
+          'eventData': {
+            'category': 'cookie-consents',
+            'action': 'click',
+            'label': labelVal,
+            'elementType': 'button'
+          },
+        }
+      };
+
+      // Accessibilty
+      var isVisible = function(element) {
+        return element.offsetHeight;
+      }
+
+      var getFocusableElements = function() {
+        var focusableSelectors = 'a[href], area[href], input:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+
+        return arrayFrom(popUp.querySelectorAll(focusableSelectors)).filter(isVisible);
+      }
+
+      var setPopUpFocusArea = function() {
+        var focusableElements = getFocusableElements(),
+        firstTabbable = focusableElements[0],
+        lastTabbable = focusableElements[focusableElements.length - 1];
+
+        firstTabbable.focus();
+        popUp.addEventListener('keydown', trapTabKey);
+
+        function trapTabKey(e) {
+          if (e.keyCode === 9) {
+            // SHIFT + TAB
+            if (e.shiftKey) {
+              if (document.activeElement === firstTabbable) {
+                e.preventDefault();
+                lastTabbable.focus();
+              }
+
+              // TAB
+            } else {
+              if (document.activeElement === lastTabbable) {
+                e.preventDefault();
+                firstTabbable.focus();
+              }
+            }
+          }
+        }
+      }
+
+      // API helper functions
+      var signalConsents = function(selections) {
+        window.cookieConsentsVars = {};
+
+        selections['cookie-consent-level'] = initialState.index;
+
+        var consentEvent = {
+          'event': 'consentsLoaded',
+          'consentsLoaded': selections
+        };
+
+        if (typeof Finnair !== 'undefined') {
+          window.Finnair.userConsents = selections;
+        } else {
+          window.cookieConsentsVars = selections;
+        }
+
+        window.dataLayer.push(consentEvent);
+
+        triggerEvent('consentsLoaded');
+      }
+
+      function triggerEvent(eventName) {
+        if (document && document.createEvent) {
+          var evt = document.createEvent("Event");
+          evt.initEvent(eventName, true, true);
+          document.dispatchEvent(evt);
+        }
+      }
+
+      function setConsentsByArguments(args) {
+        var consents = ['f-cookies-analytics', 'f-cookies-personalization', 'f-cookies-advertising'];
+
+        return consents.reduce(function(result, consent, index) {
+          result[consent] = args[index];
+
+          return result;
+        }, {});;
+      }
+
+      var getConsentStatuses = function(data) {
+        var statusCheck = data.consents.map(function (item, index) {
+          return (item.consentStatus === 'accepted') ? true : false;
+        });
+
+        var statusObj = setConsentsByArguments([statusCheck[0], statusCheck[1], statusCheck[2]]);
+
+        return statusObj;
+      };
+
+      var getIndex = function (el) {
+        for (var i = 0; i < el.length; i++)
+        if (el[i].checked) return i;
+      }
+
+      function getSelectedConsents() {
+        var selectionIndex = getIndex(radioInputs);
+
+        var selectionsObj = {
+          'f-cookies-analytics': selectionIndex > 0 ? true : false,
+          'f-cookies-personalization': selectionIndex > 1 ? true : false,
+          'f-cookies-advertising': selectionIndex > 2 ? true : false,
+        }
+
+        return selectionsObj;
+      }
+
+      function arrayFrom(el) {
+        return [].slice.call(el);
+      }
+
+      var hasWithdrawnConsent = function(consentData) {
+        var doINeedToAskForUserConsents = consentData.consents.reduce(function (acc, consent) {
+          return acc || consent.consentStatus === 'withdrawn';
+        }, false);
+
+        return doINeedToAskForUserConsents;
+      };
+
+      var acceptedConsents = function(consentData) {
+        var acceptedArr = consentData.consents.map(function (item, index) {
+          var i = index + 1; // + 1 because the first index is always selected by default
+          return (item && item.consentStatus === 'accepted') ? i : '';
+        }).filter(function (item, i) {
+          return item;
+        });
+
+        return (acceptedArr.length === 0) ? [0] : acceptedArr;
+      };
+
+      var renderSelection = function(consentData) {
+        var paragraphSetting = {
+          consentGroup: consentData.consentGroup,
+          text: consentData.introductionText,
+          afterwordText: consentData.afterwordText
+        };
+
+        [paragraphSetting].concat(consentData.consents).forEach(function (item, index) {
+          apiContainer.innerHTML += '<label for="consent-input-' + index + '" class="js-consent-popup__info consent-popup__info">' + item.text + '</label>';
+        });
+      };
+
+      // Silder creation
+      var getPositionAtCenter = function(element) {
+        var data = element.getBoundingClientRect();
+        return {
+          x: data.left + data.width / 2,
+          y: data.top + data.height / 2
+        };
+      };
+
+      function getOffset(el) {
+        var els = el.getBoundingClientRect();
+
+        return {
+          left: els.left + window.pageXOffset,
+          top: els.top + window.pageYOffset
+        }
+      }
+
+      function getDistanceBetweenElements(elementOne, elementTwo) {
+        var distance = -1;
+        var el1 = getOffset(elementOne);
+        var el2 = getOffset(elementTwo);
+
+        var x1 = el1.top;
+        var y1 = el1.left;
+        var x2 = el2.top;
+        var y2 = el2.left;
+        var xDistance = x1 - x2;
+        var yDistance = y1 - y2;
+
+        distance = Math.sqrt((xDistance * xDistance) + (yDistance * yDistance));
+
+        return distance;
+      }
+
+      function getLesserIndexes(num) {
+        var lesserArr = [];
+
+        for (var i = 0; i <= radioInputs.length; i++) {
+          if (i < num) {
+            lesserArr.push(i);
+          }
+        }
+
+        return lesserArr;
+      }
+
+      function getSelectedConsentsArray() {
+        var currentSelected = initialState.index;
+        var alreadySelected = getLesserIndexes(currentSelected);
+        var allSelected = alreadySelected.concat([currentSelected]);
+
+        return (alreadySelected) ? allSelected : [currentSelected];
+      }
+
+      function getGreaterIndexes(num) {
+        var greaterArr = [];
+
+        for (var i = 0; i < radioInputs.length; i++) {
+          if (i > num) {
+            greaterArr.push(i);
+          }
+        }
+
+        return greaterArr;
+      }
+
+      function setAttributes(el, attrs) {
+        for (var key in attrs) {
+          el.setAttribute(key, attrs[key]);
+        }
+      }
+
+      function insertAfter(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+      }
+
+      var liveRegion = document.createElement('span');
+      liveRegion.classList.add('is-vishidden');
+
+      setAttributes(liveRegion, {
+        role: 'status',
+        'aria-live': 'assertive'
+      });
+      insertAfter(liveRegion, apiContainer);
+
+      function updateAriaHelper(helperText) {
+        liveRegion.textContent = helperText;
+      }
+
+      function helperTextReader(index) {
+        var labels = arrayFrom(document.querySelectorAll('.js-consent-popup__info-container label'));
+
+        var selectedIndexes = [index].concat(getLesserIndexes(index));
+        var translateSelected = 'Selected'; // ${PAXS.button.Added} in DWM
+        var additionalHelper = 'By choosing this setting, you are also giving your consent to'; // ${ALLP.text.cookie_consent_helperText} in DWM
+
+        var labelsContent = selectedIndexes.map(function (i) {
+          return labels[i].textContent;
+        });
+
+        var selectedOption = labelsContent[0];
+        var selectedOthers = labelsContent.slice(1);
+
+        var textToRead = translateSelected + ': ' + selectedOption;
+        var helperTextToRead = textToRead + ' : ' + additionalHelper + selectedOthers;
+
+        return (labelsContent.length === 1) ? textToRead : helperTextToRead;
+      }
+
+      function initConsent() {
+        var arr = arrayFrom(radioInputs);
+
+        arr.map(function (element, i) {
+
+          arr[arr.length - 1].checked = true;
+        })
+      }
+
+      function bulletPointsHeight() {
+        var el = document.querySelector('.js-consent-slider__container input');
+
+        return el.offsetHeight;
+      }
+
+      function getSliderPercentage(index) {
+        var elDistance = getDistanceOfEls()[index],
+        heightOfFirst = (getDistanceOfEls()[0] + getDistanceOfEls()[1] + getDistanceOfEls()[2]),
+        heightOfSecond = (getDistanceOfEls()[2] + getDistanceOfEls()[1]);
+
+        if (index === 0) {
+          sliderBG.style.height = getSliderHeight() - heightOfFirst + 'px';
+        } else if (index === 1) {
+          sliderBG.style.height = getSliderHeight() - heightOfSecond + 'px';
+        } else if (index === 2) {
+          sliderBG.style.height = getSliderHeight() - elDistance + 'px';
+        } else {
+          sliderBG.style.height = getSliderHeight() + 'px';
+        }
+      }
+
+      function getDistanceOfEls() {
+        var els = arrayFrom(document.body.querySelectorAll('.consent-popup__info-container .consent-popup__info'));
+
+        var filterP = els.map(function (el, i) {
+          return el.querySelector('p').clientHeight;
+        });
+
+        var dis_1 = getDistanceBetweenElements(els[0], els[1]);
+        var dis_2 = getDistanceBetweenElements(els[1], els[2]);
+        var dis_3 = getDistanceBetweenElements(els[2], els[3]);
+        var dis_4 = filterP[filterP.length - 1];
+
+        return [dis_1, dis_2, dis_3, dis_4];
+      }
+
+      function getSliderHeight() {
+        var heightOfContent = apiContainer.offsetHeight,
+        nodes = apiContainer.querySelectorAll('label'),
+        heightOfPara = nodes[nodes.length - 1].offsetHeight;
+
+        return (heightOfContent - heightOfPara) + 20; // plus 20px extra for spacing
+      }
+
+      var resizeSlider = function() {
+        var elDistance = getDistanceOfEls(),
+        inputArray = arrayFrom(radioInputs);
+
+        inputArray.map(function (el, i) {
+          if (i === initialState.index) {
+            el.checked = true;
+
+            getGreaterIndexes(i).map(function (index) {
+              document.querySelectorAll('.js-consent-popup__info')[index].classList.add('unselected-consent');
+            });
+
+            return;
+          }
+        });
+
+        inputArray.forEach(function(el, i) {
+          inputArray[i].parentNode.style.paddingBottom = elDistance[i] - bulletPointsHeight() + 'px';
+        });
+
+        sliderContainer.style.height = getSliderHeight() + 'px';
+        getSliderPercentage(initialState.index);
+      };
+
+      var starterAnimation = function() {
+        popUp.style.display = 'block';
+        document.body.style.overflow = 'visible';
+        popUpOverlay.classList.add('consent-popup--show');
+
+        setPopUpFocusArea();
+        if (popUpOverlay) {
+          popUpOverlay.focus();
+        }
+      }
+      var InteractionTrackingModule;
+
+      var openPopup = function(consentData) {
+        var windowResize = (window.attachEvent) ? 'onresize' : 'resize';
+
+        if (!hasWithdrawnConsent(consentData)) {
+          var acceptedLastIndex = acceptedConsents(consentData)[acceptedConsents(consentData).length - 1]; // will be used
+          initialState.index = acceptedLastIndex;
+
+          // Push consents to dataLayer
+          signalConsents(getConsentStatuses(consentData));
+          // hide wrapper from screenreader
+          popUp.style.display = 'none';
+          return;
+        }
+
+        setTimeout(function() {
+          window.dataLayer.push({
+            "event": "send-view-event",
+            "eventData": {
+              "category": "cookie-consents",
+              "action": "view",
+              "label": "cookie-banner-displayed",
+              "elementType": "banner"
+            },
+          });
+        }, 100);
+
+        window.addEventListener(windowResize, resizeSlider);
+
+        if (window.innerWidth < 500) starterAnimation();
+        else starterAnimation();
+
+        renderSelection(consentData);
+        insertAfter(popUp, document.body.firstChild);
+
+        /* New update initial point */
+
+        InteractionTrackingModule = (interactionTrackingHandler)();
+      };
+
+      var isSettingClicked = false;
+
+      function interactionTrackingHandler() {
+        var isDefaultScroll = false;
+        var isBannerInteraction = false;
+
+        var interactionHandler = function (e) {
+          var isRealScroll = isScrolling();
+          var isBanner = getClosestByClass(e.target, 'js-consent-popup-overlay');
+          var isBannerClicked = isSettingClicked || getClosestByClass(e.target, 'js-consent-agree-to-all');
+          var evtMouseOver = e.type === 'mouseover';
+          var scrollInitPos = [scrollPosition()].slice()[0];
+          var eventVisibility = e.type === 'visibilitychange';
+
+          if(isBannerClicked || eventVisibility) return;
+
+          if(scrollInitPos > 0) isDefaultScroll = true;
+
+          if(e.type === 'scroll' && isDefaultScroll) {
+            if (!isScrolling()) return;
+
+            isDefaultScroll = false;
+          }
+
+          if(evtMouseOver && isBanner) isBannerInteraction = true;
+          if(evtMouseOver && !isBanner) isBannerInteraction = false;
+
+          if(isBanner || isBannerInteraction) return;
+
+          if(evtMouseOver) return;
+
+          var consentsList = setConsentsByArguments([true, true, true]);
+
+          runOnce(function () {
+            setConsentsHandler(consentsList, 'affirmative-action');
+            initialState['isAffirmativeSet'] = true;
+          });
+        }
+
+        document.addEventListener('visibilitychange', interactionHandler);
+
+        setTimeout(function() {
+          if (isCookieSet()) return;
+
+          // Global variable used as the animation returns a null element
+          window.lastScrollTime = new Date().getTime();
+
+          var elBody = document.querySelector('body');
+
+          elBody.addEventListener('click', interactionHandler);
+          elBody.addEventListener('keydown', interactionHandler);
+          elBody.addEventListener('mouseover', interactionHandler);
+          window.addEventListener('scroll', interactionHandler);
+          document.removeEventListener('visibilitychange', interactionHandler);
+        }, 3000);
+
+        return {
+          init: interactionHandler
+        }
+      }
+
+      function removeInteractionHandlers() {
+        if (!InteractionTrackingModule) return;
+
+        var elBody = document.querySelector('body');
+
+        elBody.removeEventListener('click', InteractionTrackingModule.init);
+        elBody.removeEventListener('keydown', InteractionTrackingModule.init);
+        elBody.removeEventListener('mouseover', InteractionTrackingModule.init);
+        window.removeEventListener('scroll', InteractionTrackingModule.init);
+        document.removeEventListener('visibilitychange', InteractionTrackingModule.init);
+
+        delete window.lastScrollTime;
+      }
+
+      function isCookieSet() {
+        return typeof Finnair !== 'undefined' && typeof window.Finnair.userConsents !== 'undefined' || typeof cookieConsentsVars !== 'undefined';
+      }
+
+      function scrollPosition() {
+        return window.pageYOffset || document.documentElement.scrollTop;
+      }
+
+      function isScrolling() {
+        return window.lastScrollTime && new Date().getTime() > window.lastScrollTime + 3000;
+      }
+
+      function runOnce(handler) {
+        handler();
+
+        runOnce = function () {};
+      }
+
+      function getClosestByClass(el, cls) {
+        while ((el = el.parentElement) && !el.classList.contains(cls));
+        return el;
+      }
+
+      var animatePopupContent = function (initialHeight, contentToShow) {
+        contentToShow.style.opacity = '0';
+        contentToShow.style.display = 'block';
+
+        var currentHeight = popupContent.scrollHeight + 'px',
+        transitionDelay = 100,
+        transitionLength = 400; //css transition length for consent-popup__content
+
+        popupContent.style.height = initialHeight;
+
+        setTimeout(function() {
+          popupContent.style.height = currentHeight;
+        }, transitionDelay);
+
+        setTimeout(function() {
+          popupContent.style.height = '';
+          contentToShow.style.opacity = '1';
+          contentToShow.focus();
+        }, transitionDelay + transitionLength);
+      };
+
+      var openConsentPolicy = function() {
+        var initialPopupHeight = popupContent.scrollHeight + 'px';
+        var outerWrapper = document.querySelector('#outer-wrap');
+
+        document.body.style.overflow = 'hidden';
+
+        mainContent.style.display = 'none';
+        animatePopupContent(initialPopupHeight, detailsContent);
+        popUpOverlay.classList.add('consent-popup__setting-clicked');
+
+        getSelectedConsentsArray();
+        initConsent();
+
+        window.dataLayer.push(gaSendEvent('change-settings'));
+
+        // Remove interaction handler
+        removeInteractionHandlers();
+
+        // for accessibility purpose
+        if (outerWrapper) outerWrapper.setAttribute('aria-hidden', 'true');
+        if (document.querySelector('.QSISlider')) document.querySelector('.QSISlider').style.display = 'none';
+
+        setPopUpFocusArea();
+
+        /*
+        The setTimeout method is used to focus the overlay when the animation is done, hence
+        the magic number '2000' is used
+        */
+        setTimeout(function() {
+          popupContent.setAttribute('tabindex', '0');
+          popupContent.focus();
+        }, 2000);
+      };
+
+      var closeConsentPolicy = function() {
+        var initialPopupHeight = popupContent.scrollHeight + 'px';
+        consentsList = getSelectedConsents();
+
+        animatePopupContent(initialPopupHeight, detailsContent);
+
+        // Set Focus on body element
+        setVoiceOverFocus()
+
+        setTimeout(function() {
+          if (document.querySelector('#outer-wrap')) document.querySelector('#outer-wrap').setAttribute('aria-hidden', 'false');
+          if (document.querySelector('.QSISlider')) document.querySelector('.QSISlider').style.display = 'block';
+        }, 100);
+
+
+        setTimeout(function() {
+          setConsentsHandler(consentsList, 'accept');
+
+          if (initialState['isAffirmativeSet']) {
+            if (consentsList['cookie-consent-level'] <= 2) {
+              triggerEvent('marketingConsentOptOut');
+            }
+          }
+
+        }, 100);
+      };
+
+      var acceptAll = function() {
+        var initialPopupHeight = popupContent.scrollHeight + 'px',
+        consentsList = setConsentsByArguments([true, true, true]);
+
+        animatePopupContent(initialPopupHeight, detailsContent);
+
+        // Set Focus on body element
+        setVoiceOverFocus();
+
+        setConsentsHandler(consentsList, 'close');
+      };
+
+      function setConsentsHandler(consentsList, evLabel) {
+
+        if (typeof window.finnairCookieSnippet !== 'undefined' && typeof window.finnairCookieSnippet.setConsents === 'function') {
+          window.finnairCookieSnippet.setConsents(consentsList);
+        }
+
+        // Push consents to dataLayer
+        window.dataLayer.push(gaSendEvent(evLabel));
+        signalConsents(consentsList);
+
+        removeInteractionHandlers();
+      }
+
+      function setVoiceOverFocus() {
+        var body = document.body
+        body.style.overflow = 'visible';
+        popUp.style.display = 'none';
+        body.setAttribute('tabindex', '0');
+        body.focus();
+      }
+
+      // Event handlers
+
+      [].forEach.call(radioInputs, function (element, i, radioInputs) {
+
+        var inputClickHandler = function(e) {
+          var consentSliderContainer = document.querySelectorAll('.js-consent-slider__container'),
+          consentPopupInfo = document.querySelectorAll('.js-consent-popup__info'),
+          currIndex = i;
+          initialState.index = currIndex;
+
+          getSliderPercentage(currIndex);
+          getSelectedConsentsArray();
+          updateAriaHelper(helperTextReader(currIndex));
+
+          radioInputs[currIndex].checked = true;
+
+          [].forEach.call(radioInputs, function (el) {
+            getLesserIndexes(currIndex).map(function (index) {
+              consentPopupInfo[index].classList.remove('unselected-consent');
+              consentPopupInfo[currIndex].classList.remove('unselected-consent');
+
+              radioInputs[index].classList.add('consent-slider_checked');
+              radioInputs[currIndex].classList.add('consent-slider_checked');
+            });
+
+            getGreaterIndexes(currIndex).map(function (index) {
+              consentPopupInfo[index].classList.add('unselected-consent');
+
+              radioInputs[index].classList.remove('consent-slider_checked');
+            });
+
+          }, this);
+        }
+
+        element.addEventListener('click', inputClickHandler);
+        element.parentNode.addEventListener('click', inputClickHandler);
+        element.addEventListener('focus', function (event) {
+          sliderBG.classList.add('consent-slider__bg--focus');
+        });
+
+        element.addEventListener('blur', function (event) {
+          sliderBG.classList.remove('consent-slider__bg--focus');
+        });
+      });
+
+      settingButton.addEventListener('click', function () {
+        isSettingClicked = true;
+
+        setTimeout(resizeSlider, 0);
+        openConsentPolicy();
+      });
+
+      agreeButton.addEventListener('click', closeConsentPolicy);
+      agreeToAllButton.addEventListener('click', acceptAll);
+
+      return {
+        open: function(data) {
+          openPopup(data);
+        },
+
+        close: function() {
+          closeConsentPolicy();
+        }
+      };
+    })();
+
+    var currentLocale = 'en';
+    var env = 'https://privacy.finnair.com/snippet.js?locale=';
+
+    //Dev
+    if(mockData) {
+      ConsentModule.open(mockData);
+    }
+
+    var onloadFn = function() {
+      window.finnairCookieSnippet.getConsents(function (data) {
+        ConsentModule.open(data);
+      });
+    };
+
+    (function (a, callback) {
+      var c = document.createElement('script');
+      c.src = env + encodeURIComponent(a);
+      c.async = true;
+      c.onload = callback;
+      document.body.appendChild(c);
+    })(currentLocale, onloadFn);
+
+  </script>

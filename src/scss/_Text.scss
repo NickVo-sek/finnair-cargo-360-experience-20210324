@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Amplitude Book';
+  src: url('../fonts/amplit02-webfont.woff2') format('woff2'),
+  url('../fonts/amplit02-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Amplitude Light';
+  src: url('../fonts/amplitul-webfont.woff2') format('woff2'),
+  url('../fonts/amplitul-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Amplitude Bold';
+  src: url('../fonts/amplit01-webfont.woff2') format('woff2'),
+  url('../fonts/amplit01-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Amplitude Medium';
+  src: url('../fonts/amplitude-medium-webfont.woff2') format('woff2'),
+  url('../fonts/amplitude-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Amplitude';
+  src: url('../fonts/amplitude-medium-webfont.woff2') format('woff2'),
+  url('../fonts/amplitude-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: 'Amplitude Book', Arial;
+  color: #464646;
+}
+
+h1 {
+  font-size: 5.5rem;
+  line-height: 6rem;
+  font-family: 'Amplitude Bold', Arial;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.8rem;
+  line-height: 1.7rem;
+  font-family: 'Amplitude Light', Arial;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.4;
+  padding:0 0 1em;
+}
+
+ul {
+  margin: 1em 0;
+}
+
+li {
+  font-size: 1rem;
+  margin: 0.4em 0;
+}

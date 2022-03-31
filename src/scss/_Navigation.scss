@@ -1,0 +1,116 @@
+.Navigation {
+  border-radius: 1px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.23);
+  position: fixed;
+  margin: 7px auto;
+  left:10px;
+  right:10px;
+  max-width: 100%;
+  overflow: hidden;
+
+  @include viewports(up-to medium) {
+    background: #fff;
+    height: 3.75rem;
+    line-height: 3.75rem;
+    margin: 0;
+    left: 0;
+    right: 0;
+    padding: 0 1rem 0 2rem;
+  }
+  @include viewports(up-to small) {
+    padding: 0 0% 0 5%;
+  }
+  &-relative {
+    position: relative;
+    left: auto;
+    right: auto;
+    margin: 20px 20px;
+  }
+
+  .cargoLogo, .threesixtyLogo
+  {
+    display: none;
+    height: 3.75rem;
+    max-width: 11.375rem;
+    @include viewports(up-to medium) {
+      display: inline-block;
+    }
+
+    svg
+    {
+      height: 100%;
+      width: 100%;
+      display: block;
+    }
+  }
+  .threesixtyLogo
+  {
+    float:right;
+    height: 1.5rem;
+    margin-top: 1.125rem;
+    max-width: 8%;
+    @include viewports(up-to small) {
+      max-width: 15%;
+    }
+     @include viewports(up-to tiny) {
+      max-width: 18%;
+    }
+  }
+  ul {
+    width: 100%;
+    margin: 0 auto;
+    list-style-type: none;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    @include viewports(up-to medium) {
+      display: block;
+      width: auto;
+      float:right;
+    }
+  }
+
+  li {
+    background: rgba(#fff, 0.95);
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    margin:0;
+    flex-grow:1;
+    display: flex;
+    align-items: center;
+
+    @include viewports(up-to medium) {
+      background: transparent;
+      display: none;
+
+      &.map {
+        float: right;
+        display: block;
+      }
+    }
+  }
+
+  a, button {
+    background: rgba(#fff, 0.95);
+    color: #0b1560;
+    text-decoration: none;
+    font-family: 'Amplitude Book';
+    padding: 9px 15px;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: inherit;
+
+    @include viewports(up-to medium) {
+      background: transparent;
+    }
+  }
+
+  .active a {
+    color: #0b1560;
+    font-family: 'Amplitude Bold';
+  }
+}
